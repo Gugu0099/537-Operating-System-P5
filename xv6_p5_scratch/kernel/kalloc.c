@@ -8,6 +8,14 @@
 #include "mmu.h"
 #include "spinlock.h"
 
+struct{
+  struct spinlock lock;   
+  struct run *freelist;  
+  unit  free_pages; //track free pages  
+  uint ref_cnt[PHYSTOP / PGSIZE]; //track reference count 
+
+}kmem;
+
 struct run {
   struct run *next;
 };
