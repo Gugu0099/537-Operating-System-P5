@@ -8,13 +8,6 @@
 #include "mmu.h"
 #include "spinlock.h"
 
-struct{
-  struct spinlock lock;   
-  struct run *freelist;  
-  unit  free_pages; //track free pages  
-  uint ref_cnt[PHYSTOP / PGSIZE]; //track reference count 
-
-}kmem;
 
 struct run {
   struct run *next;
@@ -29,10 +22,24 @@ struct {
   */
   uint free_pages; //track free pages
   uint ref_cnt[PHYSTOP / PGSIZE]; //track reference count
+   
 
 } kmem;
 
 extern char end[]; // first address after kernel loaded from ELF file
+
+void incrementref(char *adr) {
+  acquire(&kmem.lock);
+  kmem.ref_cnt[PADDR(adr)/PGSIZE]++;
+  release(&kmem.lock);
+}
+
+void decrementref(char *adr) {
+  acquire(&kmem.lock);
+  //TODO
+  kmem.ref_cnt[PADDR(adr)/PGSIZE]--;
+  release(&kmem.lock);
+}
 
 // Initialize free list of physical pages.
 void
@@ -41,6 +48,11 @@ kinit(void)
   char *p;
 
   initlock(&kmem.lock, "kmem");
+  for (int i = 0; i < (PHYSTOP / PGSIZE); i+=PGSIZE) {
+    kmem.ref_cnt[i] = 0;
+  }
+  kmem.free_pages = PHYSTOP / PGSIZE;
+
   p = (char*)PGROUNDUP((uint)end);
   for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE)
     kfree(p);
@@ -59,13 +71,23 @@ kfree(char *v)
     panic("kfree");
 
   // Fill with junk to catch dangling refs.
-  memset(v, 1, PGSIZE);
+  // memset(v, 1, PGSIZE);
 
   acquire(&kmem.lock);
+  // kmem.freelist = r;
+  if (kmem.ref_cnt[PADDR(v)/PGSIZE] > 1)
+  {
+    decrementref(v);
+    return;
+  } else{
+  kmem.ref_cnt[PADDR(v)/PGSIZE] = 0;
+  memset(v, 1, PGSIZE);
   r = (struct run*)v;
   r->next = kmem.freelist;
   kmem.freelist = r;
+  kmem.free_pages++;
   release(&kmem.lock);
+  }
 }
 
 // Allocate one 4096-byte page of physical memory.
@@ -78,9 +100,18 @@ kalloc(void)
 
   acquire(&kmem.lock);
   r = kmem.freelist;
-  if(r)
+  if(r){
     kmem.freelist = r->next;
+    kmem.free_pages--;
+    incrementref((char*)r); //ask about how this works in the big picture. when a child proc is created, how do we handle since no extra pages would be used
+  }
   release(&kmem.lock);
   return (char*)r;
+}
+
+int
+getFreePagesCount(void)
+{
+  return kmem.free_pages;
 }
 

@@ -15,6 +15,7 @@ void            binit(void);
 struct buf*     bread(uint, uint);
 void            brelse(struct buf*);
 void            bwrite(struct buf*);
+void            handle_cow();
 
 // console.c
 void            consoleinit(void);
@@ -66,6 +67,9 @@ void            ioapicinit(void);
 char*           kalloc(void);
 void            kfree(char*);
 void            kinit(void);
+int             getFreePagesCount(void);
+void            decrementref(char*);
+void            incrementref(char*);
 
 // kbd.c
 void            kbdintr(void);
@@ -168,6 +172,7 @@ pde_t*          copyuvm(pde_t*, uint);
 void            switchuvm(struct proc*);
 void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
+pde_t*          cowuvm(pde_t*, uint);
 
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))

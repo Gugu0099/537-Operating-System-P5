@@ -92,7 +92,7 @@ sys_uptime(void)
 // to retrieve the total number of free pages in the system.
 // this system call will help to see when pages are used, and help to debugging the code.
 int
-SYS_getFreePagesCount(void)
+sys_getFreePagesCount(void)
 {
-  return -1;
+  return getFreePagesCount();
 }
