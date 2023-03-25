@@ -70,6 +70,7 @@ void            kinit(void);
 int             getFreePagesCount(void);
 void            decrementref(char*);
 void            incrementref(char*);
+uint            getref(char*);
 
 // kbd.c
 void            kbdintr(void);

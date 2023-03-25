@@ -29,11 +29,19 @@ struct {
 extern char end[]; // first address after kernel loaded from ELF file
 
 void incrementref(char *adr) {
+  acquire(&kmem.lock);
   kmem.ref_cnt[PADDR(adr)/PGSIZE]++;
+  release(&kmem.lock);
 }
 
 void decrementref(char *adr) {
+  acquire(&kmem.lock);
   kmem.ref_cnt[PADDR(adr)/PGSIZE]--;
+  release(&kmem.lock);
+}
+
+uint getref(char *adr){
+  return kmem.ref_cnt[PADDR(adr)/PGSIZE]; //TODO add to defs.h
 }
 
 // Initialize free list of physical pages.
@@ -74,9 +82,9 @@ kfree(char *v)
   // kmem.freelist = r;
   if (kmem.ref_cnt[PADDR(v)/PGSIZE] > 1)
   {
-    decrementref(v);
-    release(&kmem.lock);
-    return;
+    kmem.ref_cnt[PADDR(v)/PGSIZE]--;
+    // release(&kmem.lock);
+    // return;
   } else{
   kmem.ref_cnt[PADDR(v)/PGSIZE] = 0;
   memset(v, 1, PGSIZE);
@@ -85,8 +93,8 @@ kfree(char *v)
   r->next = kmem.freelist;
   kmem.freelist = r;
   kmem.free_pages++;
-  release(&kmem.lock);
   }
+  release(&kmem.lock);
 }
 
 // Allocate one 4096-byte page of physical memory.
@@ -100,9 +108,10 @@ kalloc(void)
   acquire(&kmem.lock);
   r = kmem.freelist;
   if(r){
+    kmem.ref_cnt[PADDR((char*)r)/PGSIZE] = 1;
     kmem.freelist = r->next;
     kmem.free_pages--;
-    incrementref((char*)r); //ask about how this works in the big picture. when a child proc is created, how do we handle since no extra pages would be used
+    //incrementref((char*)r); //ask about how this works in the big picture. when a child proc is created, how do we handle since no extra pages would be used
   }
   release(&kmem.lock);
   return (char*)r;

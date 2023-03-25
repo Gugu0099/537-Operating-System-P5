@@ -396,6 +396,7 @@ cowuvm(pde_t *pgdir, uint sz)
 
 bad:
   freevm(d);
+  lcr3(PADDR(pgdir)); 
   return 0;
 }
 
@@ -403,15 +404,58 @@ bad:
 void
 handle_cow()
 {
+  char *mem;
   pte_t* pte;
-  unit addr = rcr2();
+  pde_t* pde = proc->pgdir;
 
-  if(addr >= PGROUNDDOWN(proc->SZ)){
-    cprintf("CoW: Invalid virtual address\n");
+  uint addr = (uint)PGROUNDDOWN(rcr2());
+  pte = walkpgdir(pde, (void*)addr,0);
+
+  uint pa = PTE_ADDR(*pte);
+  int ref_count = getref((char*)pa);
+ // cprintf("Num ref: %d", ref_count);
+
+  //checking if PTE exists to check if addr is valid
+  if (!pte || !(*pte & PTE_P))
+  {
+    cprintf("CoW: Invalid virtual address");
+    exit();
+  }
+  // checking writable
+  if((*pte & PTE_W)){
+    panic("WTFF");
     return;
   }
 
-  if(pte= walkpgdir(proc->pgdir, (void*)addr,0) == 0)
-    panic("handle_cow:pte should exist");
+  // int ref_count = getref((char*)pa); //cast
+  if (ref_count>1)
+  {
+    decrementref((char*)pa);
+    if((mem = kalloc()) == 0){
+      proc->killed = 1;
+      return;
+    }
+    
+    memmove(mem, (char*)pa, PGSIZE);
 
+
+    //set permissionsdec ref count then flush last case |= with write
+    *pte = PADDR(mem) | PTE_P | PTE_W |PTE_U;
+    lcr3(PADDR(pde)); 
+    return;
+  } else if (ref_count < 1){
+    // TODO
+  } else {
+    *pte |= PTE_W;
+    lcr3(PADDR(pde)); 
+  }
+
+  lcr3(PADDR(pde)); 
+
+  // check if 1 or not
+  // greater 1, get kalloc, move it to different phy addr.   
+
+
+
+  
 }
