@@ -29,16 +29,11 @@ struct {
 extern char end[]; // first address after kernel loaded from ELF file
 
 void incrementref(char *adr) {
-  acquire(&kmem.lock);
   kmem.ref_cnt[PADDR(adr)/PGSIZE]++;
-  release(&kmem.lock);
 }
 
 void decrementref(char *adr) {
-  acquire(&kmem.lock);
-  //TODO
   kmem.ref_cnt[PADDR(adr)/PGSIZE]--;
-  release(&kmem.lock);
 }
 
 // Initialize free list of physical pages.
@@ -48,14 +43,16 @@ kinit(void)
   char *p;
 
   initlock(&kmem.lock, "kmem");
-  for (int i = 0; i < (PHYSTOP / PGSIZE); i+=PGSIZE) {
-    kmem.ref_cnt[i] = 0;
-  }
-  kmem.free_pages = PHYSTOP / PGSIZE;
-
+  // for (int i = 0; i < (PHYSTOP / PGSIZE); i+=1) {
+  //   kmem.ref_cnt[i] = 0;
+  // }
+  kmem.free_pages = 0;
   p = (char*)PGROUNDUP((uint)end);
-  for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE)
+  for(; p + PGSIZE <= (char*)PHYSTOP; p += PGSIZE){
+    kmem.ref_cnt[(uint)p/PGSIZE] = 0;
     kfree(p);
+
+  }
 }
 
 // Free the page of physical memory pointed at by v,
@@ -78,10 +75,12 @@ kfree(char *v)
   if (kmem.ref_cnt[PADDR(v)/PGSIZE] > 1)
   {
     decrementref(v);
+    release(&kmem.lock);
     return;
   } else{
   kmem.ref_cnt[PADDR(v)/PGSIZE] = 0;
   memset(v, 1, PGSIZE);
+  
   r = (struct run*)v;
   r->next = kmem.freelist;
   kmem.freelist = r;
