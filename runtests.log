@@ -1,0 +1,230 @@
+starting build
+
+**********************************************************************
+
+Test build
+build xv6 using make
+
+**********************************************************************
+Trying to build project using make
+make
+make: *** No targets specified and no makefile found.  Stop.
+
+
+test build FAILED
+ (build xv6 using make)
+ make failed (error 2)
+ required file 'xv6.img' does not exist after make
+ required file 'fs.img' does not exist after make
+
+starting test_1
+
+**********************************************************************
+
+Test test_1
+Test to make sure that the number of free pages is greater than 0
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_1.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_1 FAILED (0 of 1)
+ (Test to make sure that the number of free pages is greater than 0)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_2
+
+**********************************************************************
+
+Test test_2
+Test that sbrk() reduces the number of free pages
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_2.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_2 FAILED (0 of 1)
+ (Test that sbrk() reduces the number of free pages)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_3
+
+**********************************************************************
+
+Test test_3
+Test that pages are copied on write and that the parent values are not affected by the child
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_3.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_3 FAILED (0 of 1)
+ (Test that pages are copied on write and that the parent values are not affected by the child)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_4
+
+**********************************************************************
+
+Test test_4
+Test that all pages are not copied when process forks - 1
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_4.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_4 FAILED (0 of 1)
+ (Test that all pages are not copied when process forks - 1)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_5
+
+**********************************************************************
+
+Test test_5
+Test that all pages are not copied when process forks - 2
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_5.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_5 FAILED (0 of 1)
+ (Test that all pages are not copied when process forks - 2)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_6
+
+**********************************************************************
+
+Test test_6
+Test that pages copied are equal to the pages written to
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_6.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_6 FAILED (0 of 1)
+ (Test that pages copied are equal to the pages written to)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_7
+
+**********************************************************************
+
+Test test_7
+Test that multiple copies are created when pages shared by more processes are modified
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_7.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_7 FAILED (0 of 1)
+ (Test that multiple copies are created when pages shared by more processes are modified)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_8
+
+**********************************************************************
+
+Test test_8
+Test that pages copied are equal to the pages written to - Modify non-contiguous pages
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_8.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_8 FAILED (0 of 1)
+ (Test that pages copied are equal to the pages written to - Modify non-contiguous pages)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_9
+
+**********************************************************************
+
+Test test_9
+Test reference counting for CoW
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_9.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_9 FAILED (0 of 1)
+ (Test reference counting for CoW)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+starting test_10
+
+**********************************************************************
+
+Test test_10
+Test reference counting for CoW- new allocations from child don't affect parent
+
+**********************************************************************
+Running xv6 user progam /home/cs537-1/tests/P5/ctests/test_10.c
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+
+test test_10 FAILED (0 of 1)
+ (Test reference counting for CoW- new allocations from child don't affect parent)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+**********************************************************************
+Summary:
+test build FAILED
+ (build xv6 using make)
+ make failed (error 2)
+ required file 'xv6.img' does not exist after make
+ required file 'fs.img' does not exist after make
+
+test test_1 FAILED (0 of 1)
+ (Test to make sure that the number of free pages is greater than 0)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_2 FAILED (0 of 1)
+ (Test that sbrk() reduces the number of free pages)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_3 FAILED (0 of 1)
+ (Test that pages are copied on write and that the parent values are not affected by the child)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_4 FAILED (0 of 1)
+ (Test that all pages are not copied when process forks - 1)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_5 FAILED (0 of 1)
+ (Test that all pages are not copied when process forks - 2)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_6 FAILED (0 of 1)
+ (Test that pages copied are equal to the pages written to)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_7 FAILED (0 of 1)
+ (Test that multiple copies are created when pages shared by more processes are modified)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_8 FAILED (0 of 1)
+ (Test that pages copied are equal to the pages written to - Modify non-contiguous pages)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_9 FAILED (0 of 1)
+ (Test reference counting for CoW)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+test test_10 FAILED (0 of 1)
+ (Test reference counting for CoW- new allocations from child don't affect parent)
+ Unexpected exception [Errno 2] No such file or directory: '/tmp/tmpzpzl28t9/p/user/tester.c'
+
+Passed 0 of 11 tests.
+Overall 0 of 11
+Points 0 of 10

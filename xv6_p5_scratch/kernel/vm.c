@@ -403,6 +403,15 @@ bad:
 void
 handle_cow()
 {
- // uint addr = rcr2();
-  cprintf("reaching to trap fault");
+  pte_t* pte;
+  unit addr = rcr2();
+
+  if(addr >= PGROUNDDOWN(proc->SZ)){
+    cprintf("CoW: Invalid virtual address\n");
+    return;
+  }
+
+  if(pte= walkpgdir(proc->pgdir, (void*)addr,0) == 0)
+    panic("handle_cow:pte should exist");
+
 }
