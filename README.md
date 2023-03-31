@@ -1,8 +1,6 @@
-# 537-Operating-System-P5 - Project
-
-Section - 001 (Prof. Shivaram)
-
-Group - 79
-
-GIRIK SONI 
-GULINAZI JULATI
+Name: Girik Soni; Gulinazi Julati
+Section: 001
+Group Number: Group 79
+CS Login: girik;gulinazi
+Wisc ID: 9081272677;9082228082
+Email: gsoni@wisc.edu; julati@wisc.edu

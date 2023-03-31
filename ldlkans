@@ -1,0 +1,53 @@
+[33mcommit bb807e647f1606a1e71341a0d8566f8fc5b481d8[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: girik4 <giriksoni4@gmail.com>
+Date:   Thu Mar 30 19:07:39 2023 -0500
+
+    Modified README for submission
+
+[33mcommit bda689e5549cf11f609d66a8501d65b95bed3e3c[m
+Author: girik4 <giriksoni4@gmail.com>
+Date:   Sat Mar 25 15:47:51 2023 -0500
+
+    11/11 -made some changes to make it more legible - girik
+
+[33mcommit bfda4aea79d6974993761d45b1ff09c71ff6d08e[m
+Author: girik4 <giriksoni4@gmail.com>
+Date:   Sat Mar 25 14:38:18 2023 -0500
+
+    11/11 pass all tests
+
+[33mcommit 21da535e09f9193f8232e5353b7648a91abf521c[m
+Author: Gulinazi Julati <gulinazi@vm-instunix-07.cs.wisc.edu>
+Date:   Sat Mar 25 13:09:45 2023 -0500
+
+    handle_cow update
+
+[33mcommit 11840956279e7051061f8283b9a7d79f8171f3f9[m
+Author: Gulinazi Julati <gulinazi@snares-03.cs.wisc.edu>
+Date:   Fri Mar 24 19:10:48 2023 -0500
+
+    booting fix
+
+[33mcommit a16b19c305029be54d46d9420bd3011e9b986371[m
+Author: Gulinazi Julati <gulinazi@snares-03.cs.wisc.edu>
+Date:   Fri Mar 24 18:45:03 2023 -0500
+
+    booting error
+
+[33mcommit 2d88182614605b6eedcbcdacbb9b8b8265f8a480[m
+Author: Gulinazi Julati <gulinazi@royal-23.cs.wisc.edu>
+Date:   Fri Mar 24 13:42:42 2023 -0500
+
+    syscall
+
+[33mcommit 7389b7d47167f1ac19cb9e749853e16999639df9[m
+Author: Gulinazi Julati <gulinazi@royal-23.cs.wisc.edu>
+Date:   Fri Mar 24 12:36:10 2023 -0500
+
+    empty commit
+
+[33mcommit 166e60d245981168eb4603b0eb783a196847c89d[m
+Author: Gulinazi Julati <gulinazi@royal-23.cs.wisc.edu>
+Date:   Fri Mar 24 12:35:25 2023 -0500
+
+    first commit
