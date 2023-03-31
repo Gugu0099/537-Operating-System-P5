@@ -405,7 +405,6 @@ bad:
 // Handler for page fault, called from kernel in trap.c
 void handle_cow()
 {
-
   char *mem;
   pte_t *pte;
   uint addr = rcr2();
